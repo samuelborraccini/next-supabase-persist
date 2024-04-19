@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -18,6 +17,9 @@ import { useAppDispatch } from "@/redux/hooks";
 import { createClient } from "@/lib/supabase/client";
 import { setUser } from "@/redux/slices/mainSlice";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { FiEye, FiEyeOff } from "react-icons/fi";
+import { useState } from "react";
 const formSchema = z.object({
   email: z.string().email("Must enter a valid email"),
   password: z.string().min(2, {
@@ -29,6 +31,8 @@ export default function SignUpForm() {
   const dispatch = useAppDispatch();
   const supabase = createClient();
   const router = useRouter();
+  const [hidePassword, setHidePassword] = useState(true);
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -40,13 +44,20 @@ export default function SignUpForm() {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const res = await supabase.auth.signInWithPassword(values);
-    const user = res.data.user;
-    if (user && user.email) {
-      dispatch(setUser({ id: parseInt(user.id), email: user.email }));
-      router.push("/");
-    } else {
-      console.log("error");
+    try {
+      const res = await supabase.auth.signInWithPassword(values);
+      if (res.error) {
+        throw new Error();
+      }
+      const user = res.data.user;
+      if (user && user.email) {
+        dispatch(setUser({ id: parseInt(user.id), email: user.email }));
+        router.push("/");
+      }
+    } catch (error) {
+      toast.error("Incorrect username or password", {
+        position: "bottom-center",
+      });
     }
   }
   return (
@@ -72,9 +83,30 @@ export default function SignUpForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input placeholder="password" {...field} />
-              </FormControl>
+              <div className="flex relative">
+                <FormControl>
+                  <Input
+                    type={hidePassword ? "password" : ""}
+                    placeholder="password"
+                    {...field}
+                  />
+                </FormControl>
+                {hidePassword ? (
+                  <FiEye
+                    size={30}
+                    className="absolute right-4 top-1 cursor-pointer"
+                    onClick={() => setHidePassword(!hidePassword)}
+                    color="gray"
+                  />
+                ) : (
+                  <FiEyeOff
+                    size={30}
+                    className="absolute right-4 top-1 cursor-pointer"
+                    onClick={() => setHidePassword(!hidePassword)}
+                    color="gray"
+                  />
+                )}
+              </div>
 
               <FormMessage />
             </FormItem>
