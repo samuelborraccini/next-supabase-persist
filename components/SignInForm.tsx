@@ -19,7 +19,9 @@ import { setUser } from "@/redux/slices/mainSlice";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { useState } from "react";
+import { IoLogoGithub } from "react-icons/io";
+
+import { useEffect, useState } from "react";
 const formSchema = z.object({
   email: z.string().email("Must enter a valid email"),
   password: z.string().min(2, {
@@ -32,6 +34,12 @@ export default function SignUpForm() {
   const supabase = createClient();
   const router = useRouter();
   const [hidePassword, setHidePassword] = useState(true);
+  const handleGithub = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "github",
+    });
+  };
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -62,7 +70,10 @@ export default function SignUpForm() {
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 border-[0.5px] p-10 rounded-xl border-gray-300"
+      >
         <FormField
           control={form.control}
           name="email"
@@ -112,9 +123,19 @@ export default function SignUpForm() {
             </FormItem>
           )}
         />
-        <Button className="w-full" type="submit" variant={"success"}>
-          Log In
-        </Button>
+        <div className="flex space-y-3 flex-col">
+          <Button className="w-full" type="submit" variant={"success"}>
+            Log In
+          </Button>
+          <Button
+            className="w-full"
+            type="submit"
+            variant="default"
+            onClick={handleGithub}
+          >
+            <IoLogoGithub size={30} /> Github
+          </Button>
+        </div>
       </form>
     </Form>
   );

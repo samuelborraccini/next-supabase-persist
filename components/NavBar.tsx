@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavigationMenu from "./NavigationMenu";
 import Image from "next/image";
 import { Button } from "./ui/button";
@@ -28,9 +28,26 @@ const NavBar = () => {
     dispatch(clearUser());
     router.push("/");
   };
+
+  useEffect(() => {
+    const supabaseAction = async () => {
+      const supabase = createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (user?.email && user.id) {
+        dispatch(setUser({ email: user.email, id: parseInt(user.id) }));
+        console.log("hola");
+      }
+    };
+    supabaseAction();
+  }, []);
   return (
     <nav className="flex items-center justify-between mb-12">
-      <div className="flex flex-row justify-start items-center space-x-4 ">
+      <Link
+        href="/"
+        className="flex flex-row justify-start items-center space-x-4 "
+      >
         <Image
           className="animate-bounce"
           src={"/images/frog.png"}
@@ -41,7 +58,7 @@ const NavBar = () => {
         <h1 className="text-4xl bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-700 font-bold">
           Frogs <span className="text-white">.</span>
         </h1>
-      </div>
+      </Link>
       <div className="mr-24">
         <NavigationMenu />
       </div>
