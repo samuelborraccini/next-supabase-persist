@@ -37,7 +37,7 @@ const NavBar = () => {
       } = await supabase.auth.getUser();
       if (user?.email && user.id) {
         dispatch(setUser({ email: user.email, id: parseInt(user.id) }));
-        console.log("hola");
+        console.log(user);
       }
     };
     supabaseAction();

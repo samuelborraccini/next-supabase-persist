@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { IoLogoGithub } from "react-icons/io";
+import { FaDiscord, FaFacebook } from "react-icons/fa";
 
 import { useEffect, useState } from "react";
 const formSchema = z.object({
@@ -38,6 +39,18 @@ export default function SignUpForm() {
     event.preventDefault();
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "github",
+      options: {
+        redirectTo: `${location.origin}/auth/callback`,
+      },
+    });
+  };
+  const handleDiscord = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "discord",
+      options: {
+        redirectTo: `${location.origin}/auth/callback`,
+      },
     });
   };
 
@@ -127,14 +140,14 @@ export default function SignUpForm() {
           <Button className="w-full" type="submit" variant={"success"}>
             Log In
           </Button>
-          <Button
-            className="w-full"
-            type="submit"
-            variant="default"
-            onClick={handleGithub}
-          >
-            <IoLogoGithub size={30} /> Github
-          </Button>
+          <div className="flex justify-center space-x-2">
+            <Button type="submit" variant="default" onClick={handleGithub}>
+              <IoLogoGithub size={30} />
+            </Button>
+            <Button type="submit" variant="default" onClick={handleDiscord}>
+              <FaDiscord size={30} />
+            </Button>
+          </div>
         </div>
       </form>
     </Form>
