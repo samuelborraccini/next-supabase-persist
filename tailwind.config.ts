@@ -59,6 +59,11 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        shimmer: {
+          "0%": { backgroundPosition: "top left" },
+          "100%": { backgroundPosition: "top right" },
+        },
+
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -72,6 +77,7 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         bounce: "bounce 1s ease-out 5.5",
+        shimmer: "2s infinite shimmer",
       },
     },
   },

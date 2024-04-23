@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`inter.className dark px-6 py-6`}>
+      <body className={`${inter.className} dark px-6 py-6`}>
         <NavbarProvider />
         {children}
         <ToastContainer />
