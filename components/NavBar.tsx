@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { clearUser, setUser } from "@/redux/slices/mainSlice";
+import ThemeSwitch from "./ThemeSwitch";
 const NavBar = () => {
   const user = useAppSelector((state) => state.user.user);
   const dispatch = useAppDispatch();
@@ -44,38 +45,30 @@ const NavBar = () => {
   }, []);
   return (
     <nav className="flex items-center justify-between mb-12">
-      <Link
-        href="/"
-        className="flex flex-row justify-start items-center space-x-4 "
-      >
-        <Image
-          className="animate-bounce"
-          src={"/images/frog.png"}
-          height={30}
-          width={30}
-          alt="logo"
-        />
-        <h1 className="text-4xl bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-green-700 font-bold">
-          Frogs <span className="text-white">.</span>
-        </h1>
+      <Link href="/" className="flex flex-row justify-start items-center ">
+        <Image src={"/images/logo.png"} height={100} width={100} alt="logo" />
+        <h1 className="text-4xl  font-bold">Swing</h1>
       </Link>
       <div className="mr-24">
         <NavigationMenu />
       </div>
-      {user?.email ? (
-        <Popover>
-          <PopoverTrigger>{user.email}</PopoverTrigger>
-          <PopoverContent className="flex justify-center">
-            <Button variant="destructive" onClick={handleLogout}>
-              Log Out
-            </Button>
-          </PopoverContent>
-        </Popover>
-      ) : (
-        <Button asChild>
-          <Link href="/login">Login</Link>
-        </Button>
-      )}
+      <div className="flex space-x-6 items-center justify-center">
+        <ThemeSwitch />
+        {user?.email ? (
+          <Popover>
+            <PopoverTrigger>{user.email}</PopoverTrigger>
+            <PopoverContent className="flex justify-center">
+              <Button variant="destructive" onClick={handleLogout}>
+                Log Out
+              </Button>
+            </PopoverContent>
+          </Popover>
+        ) : (
+          <Button asChild>
+            <Link href="/login">Login</Link>
+          </Button>
+        )}
+      </div>
     </nav>
   );
 };

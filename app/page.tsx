@@ -1,12 +1,8 @@
-"use client";
 import ReduxProvider from "@/redux/ReduxProvider";
 
 import HeroSection from "./HeroSection";
+import ProviderWrapper from "./ProviderWrapper";
 
 export default function Home() {
-  return (
-    <ReduxProvider>
-      <HeroSection />
-    </ReduxProvider>
-  );
+  return <HeroSection />;
 }

@@ -7,9 +7,9 @@ import { store } from "@/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import ReduxProvider from "@/redux/ReduxProvider";
-import NavbarProvider from "./NavbarProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.min.css";
+import ProviderWrapper from "./ProviderWrapper";
 const inter = Inter({ subsets: ["latin"] });
 let persistor = persistStore(store);
 
@@ -19,10 +19,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} dark px-6 py-6`}>
-        <NavbarProvider />
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} bg-white dark:bg-black px-6 py-6`}>
+        <ProviderWrapper>
+          <NavBar />
+          {children}
+        </ProviderWrapper>
         <ToastContainer />
       </body>
     </html>

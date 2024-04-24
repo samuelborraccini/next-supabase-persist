@@ -19,17 +19,13 @@ const NavBar = () => {
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>Get to know us</NavigationMenuTrigger>
-          <NavigationMenuContent>
+          <NavigationMenuContent className="bg-black">
             <ul className="md:w-[200px] flex flex-col">
-              <li>
-                <ListItem href="/docs/installation" title="What we do" />
-              </li>
-              <li>
-                <ListItem href="/docs/installation" title="Why frogs?" />
-              </li>
-              <li>
-                <ListItem href="/docs/installation" title="Whats the plan" />
-              </li>
+              <ListItem href="/docs/installation" title="What we do" />
+
+              <ListItem href="/docs/installation" title="Why frogs?" />
+
+              <ListItem href="/docs/installation" title="Whats the plan" />
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>

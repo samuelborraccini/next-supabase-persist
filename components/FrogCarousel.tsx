@@ -1,5 +1,5 @@
+"use client";
 import * as React from "react";
-
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
@@ -13,40 +13,42 @@ import AutoScroll from "embla-carousel-auto-scroll";
 import FrogCarouselItem from "./FrogCarouselItem";
 const frogList = [
   {
-    title: "Bull Frog",
+    title: "Houston Astros",
     subtitle: "live in freshwater ponds, lakes, and marshes",
-    imageUrl: "/images/bullfrog.png",
+    imageUrl: "/images/astros.png",
     color: "bg-amber-800",
   },
   {
-    title: "Poison Dart Frog",
+    title: "New York Yankees",
     subtitle: "live in freshwater ponds, lakes, and marshes",
-    imageUrl: "/images/poisonfrog.png",
+    imageUrl: "/images/yankees.png",
+    color: "bg-gray-500",
+  },
+  {
+    title: "Atlanta Braves",
+    subtitle: "live in freshwater ponds, lakes, and marshes",
+    imageUrl: "/images/braves.png",
     color: "bg-blue-400",
   },
+
   {
-    title: "Lemur Leaf Frog",
-    subtitle: "live in freshwater ponds, lakes, and marshes",
-    imageUrl: "/images/lemurfrog.png",
-    color: "bg-green-500",
-  },
-  {
-    title: "Future Frog",
+    title: "New York Mets",
     subtitle: "Created and imagined ny DALL-E",
-    imageUrl: "/images/futfrog.png",
-    color: "bg-pink-500",
+    imageUrl: "/images/mets.png",
+    color: "bg-blue-500",
+  },
+
+  {
+    title: "Baltimore Orioles",
+    subtitle: "live in freshwater ponds, lakes, and marshes",
+    imageUrl: "/images/orioles.png",
+    color: "bg-red-300",
   },
   {
-    title: "Brazilian Horned Frog",
+    title: "Los Angeles Dodgers",
     subtitle: "live in freshwater ponds, lakes, and marshes",
-    imageUrl: "/images/hornfrog.png",
-    color: "bg-yellow-500",
-  },
-  {
-    title: "Red-eyed frog",
-    subtitle: "live in freshwater ponds, lakes, and marshes",
-    imageUrl: "/images/redfrog.png",
-    color: "bg-red-500",
+    imageUrl: "/images/dodgers.png",
+    color: "bg-cyan-500",
   },
 ];
 const FrogCarousel = () => {
@@ -54,9 +56,9 @@ const FrogCarousel = () => {
     <Carousel
       plugins={[AutoScroll({ speed: 1 })]}
       opts={{ loop: true, watchDrag: false }}
-      className="w-full border-t-[1px] "
+      className="w-full border-[1px] p-6 rounded-xl "
     >
-      <CarouselContent className="w-full h-[450px] ">
+      <CarouselContent className="w-full h-[400px] ">
         {Array.from(frogList).map((frog, index) => (
           <FrogCarouselItem
             key={index}
@@ -67,8 +69,8 @@ const FrogCarousel = () => {
           />
         ))}
       </CarouselContent>
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white dark:from-background"></div>
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white dark:from-background"></div>
+      <div className="pointer-events-none rounded-xl absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white dark:from-background"></div>
+      <div className="pointer-events-none rounded-xl absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white dark:from-background"></div>
     </Carousel>
   );
 };

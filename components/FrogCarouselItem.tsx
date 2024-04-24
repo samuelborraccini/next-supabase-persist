@@ -1,5 +1,5 @@
 import React from "react";
-import { FaListUl } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 
 import { CarouselItem } from "./ui/carousel";
 import {
@@ -27,20 +27,20 @@ const FrogCarouselItem = ({
   backgroundColor,
 }: props) => {
   return (
-    <CarouselItem className="md:basis-1/2 lg:basis-1/4">
+    <CarouselItem className="md:basis-1/2 lg:basis-1/3 xl:basis-[28%]">
       <Card
         className={`h-full flex flex-col justify-between ${backgroundColor} w-80`}
       >
         <CardHeader>
           <CardTitle>{title}</CardTitle>
           <CardDescription className="text-gray-200">
-            {subtitle}
+            players, positions and more
           </CardDescription>
         </CardHeader>
         <CardContent className="flex justify-center">
           <Image
             src={image}
-            style={{ width: "90%", height: "auto" }}
+            style={{ width: "50%", height: "auto" }}
             height={200}
             width={100}
             alt="frog"
@@ -48,8 +48,8 @@ const FrogCarouselItem = ({
         </CardContent>
         <CardFooter>
           <div className="bg-white pt-1 pb-1 pl-4 pr-4 rounded-md text-black flex items-center justify-center space-x-2">
-            <FaListUl size={15} />
-            <div>More</div>
+            <div>Favorite</div>
+            <FaStar className="text-yellow-500" size={15} />
           </div>
         </CardFooter>
       </Card>
