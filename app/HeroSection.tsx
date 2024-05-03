@@ -1,6 +1,8 @@
+"use client";
 import FrogCarousel from "@/components/FrogCarousel";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setUser } from "@/redux/slices/mainSlice";
+import { motion } from "framer-motion";
 import React, { useEffect } from "react";
 
 const HeroSection = () => {
@@ -16,10 +18,22 @@ const HeroSection = () => {
           </div>
         </div>
         <header className="mx-auto w-[600px] text-center flex flex-col space-y-4">
-          <h1 className="text-5xl font-bold ">
+          <motion.h1
+            initial={{ opacity: 0, x: "-25%" }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.75 }}
+            className="text-5xl font-bold "
+          >
             Keep up with the league and your favorite teams
-          </h1>
-          <p className="text-gray-500">Standings, stats and much more</p>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, x: "25%" }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.75 }}
+            className="text-gray-500"
+          >
+            Standings, stats and much more
+          </motion.p>
         </header>
       </div>
       <FrogCarousel />
