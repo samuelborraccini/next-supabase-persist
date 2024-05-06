@@ -36,7 +36,7 @@ const NavBar = () => {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuLink
-            href="/Contact Us"
+            href="/contact"
             className={navigationMenuTriggerStyle()}
           >
             Contact Us
